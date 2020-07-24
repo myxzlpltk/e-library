@@ -1,0 +1,129 @@
+*{
+    font-family: "Roboto", sans-serif;
+}
+body{
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+main{
+    flex: 1 0 auto;
+}
+
+/* NAVBAR */
+.navbar-fixed{
+    z-index: 1000;
+}
+.brand-logo{
+    font-weight: 900;
+    text-shadow: 1px 1px #66b0ff, 2px 2px #66b0ff, 3px 3px #66b0ff;
+    color: #fff !important;
+}
+#dropdown-kategori,#dropdown-pengguna{
+    top: -65px;
+}
+#dropdown-kategori-mobile,#dropdown-pengguna-mobile{
+    top: -50px;
+}
+#dropdown-kategori,#dropdown-pengguna{
+    width: auto !important;
+}
+.sidenav{
+    z-index: 1100;
+}
+
+/* HOME */
+.gayatri{
+    text-align: center;
+    color: #fff;
+    font-weight: 900 !important;
+    font-size: 3em;
+    font-family: "Pacifico",sans-serif !important;
+}
+.preloader-background {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eee;
+    
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;  
+}
+#owl-gallery .bg-img{
+    height: 400px;
+}
+
+/* LIST BOOK */
+#list-book > div{
+    padding: 0.5rem;
+}
+#list-book .card-content > .card-title{
+    font-size: 1em;
+    display: block;
+    line-height: 16px;
+    margin-bottom: 0px;
+}
+#list-book .card{
+    height: 100%;
+}
+#list-book .card-action{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 15px;
+}
+#list-book .card-content{
+    margin-bottom: 50px;
+    padding: 15px;
+}
+#list-book > .book-item > .card-reveal .card-title{
+    font-size: 0.75em;
+    line-height: 14px;
+}
+li#filter-box.active .expand-icon{
+    -ms-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+/* SEARCH BOX */
+#searchBox{
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 999;
+    display: none;
+}
+#searchBox form{
+    padding-top: 150px;
+}
+
+/* HELPER */
+.error-404{
+    font-size: 10em !important;
+    text-shadow: -1px -1px 1px #ccc, #ff9800 1px 1px, #ff9800 2px 2px, #ff9800 3px 3px, #ff9800 4px 4px, #ff9800 5px 5px, #ff9800 6px 6px, #ff9800 7px 7px, #ff9800 8px 8px, #ff9800 9px 9px, #ff9800 10px 10px, #ff9800 11px 11px, #ff9800 12px 12px, #ff9800 13px 13px, #ff9800 14px 14px, #ff9800 15px 15px, #ff9800 16px 16px, #ff9800 17px 17px, #ff9800 18px 18px, #ff9800 19px 19px, #ff9800 20px 20px, #ff9800 21px 21px, #ffb74d 22px 22px, #ffb74d 23px 23px, #ffb74d 24px 24px, #ffb74d 25px 25px, #ffb74d 26px 26px, #ffb74d 27px 27px, #ffb74d 28px 28px, #ffb74d 29px 29px, #ffb74d 30px 30px, #ffe0b2 31px 31px, #ffe0b2 32px 32px, #ffe0b2 33px 33px, #ffe0b2 34px 34px, #ffe0b2 35px 35px, #ffe0b2 36px 36px, #ffe0b2 37px 37px; color: #fff !important;
+    padding-right: 50px !important;
+}
+.w-100{
+    width: 100% !important;
+}
+.h-100{
+    height: 100% !important;
+}
+.break{
+    word-break: break-all;
+}
+.auto{
+    max-height: 400px;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+}

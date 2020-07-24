@@ -1,0 +1,136 @@
+<?= doctype('html5'); ?>
+<html lang="id">
+<head>
+	<title>TEST ENKRIPSI</title>
+	<?= meta('Content-type', 'text/html; charset=utf-8', 'equiv') ?>
+	<?= meta('viewport','width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no') ?>
+	<?= link_tag('assets/plugins/materialize/css/materialize.min.css') ?>
+	<?= link_tag('assets/plugins/material-icons/material-icons.css') ?>
+	<?= link_tag('assets/fonts/roboto/roboto.css') ?>
+	<?= link_tag('assets/style.css') ?>
+	<?= link_tag('assets/img/favicon.ico', 'icon', 'image/ico') ?>
+</head>
+<body>
+
+	<main class="blue lighten-5">
+		<div class="section">
+			<div class="container">
+				<div class="card card-panel">
+					<div class="row margin">
+						<div class="input-field col s12 m6">
+							<i class="material-icons prefix">code</i>
+							<input id="awal" name="awal" type="number" class="validate" min="1" id="awal" value="1">
+							<label for="awal">Awal</label>
+							<span class="helper-text" data-error="Harus berisi bilangan bulat" data-success="Kolom valid"></span>
+						</div>
+						<div class="input-field col s12 m6">
+							<i class="material-icons prefix">code</i>
+							<input id="akhir" name="akhir" type="number" class="validate" min="1" id="akhir">
+							<label for="akhir">Akhir</label>
+							<span class="helper-text" data-error="Harus berisi bilangan bulat" data-success="Kolom valid"></span>
+						</div>
+						<div class="input-field col s12 m6">
+							<i class="material-icons prefix">people</i>
+							<input id="agent" name="agent" type="number" class="validate" min="1" id="agent" value="10">
+							<label for="agent">Agent</label>
+							<span class="helper-text" data-error="Harus berisi bilangan bulat" data-success="Kolom valid"></span>
+						</div>
+						<div class="col s12 m6">
+							<button type="button" class="btn btn-large blue waves-effect waves-light right" id="startTest">Mulai Tes</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="card card-panel" id="result">
+					<p class="card-title">Hasil Tes Gagal: <span class="badge green white-text" id="now-testing">0</span></p>
+					<table>
+						<thead>
+							<tr>
+								<th>TEST CASE</th>
+								<th>ENKRIPSI</th>
+								<th>HASIL DESKRIPSI</th>
+								<th>KETERANGAN</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<?= script('assets/plugins/jquery/jquery.min.js') ?>
+	<?= script('assets/plugins/sweetalert/sweetalert.min.js') ?>
+	<?= script('assets/plugins/materialize/js/materialize.min.js') ?>
+	<?= script('assets/main.js') ?>
+	<script type="text/javascript">
+		var data = [];
+		var now = 0;
+		var max = 0;
+		var isBusy = false;
+		$(document).ready(function() {
+			$('#startTest').click(function(){
+				if(!isBusy){
+					now = $('#awal').val();
+					max = $('#akhir').val();
+					var agent = $('#agent').val();
+					for(var i = 0; i < agent-1; i++){
+						test(now);
+						now++;
+					}
+					test(now);
+					isBusy = true;
+					$('#now-testing').removeClass('green');
+					$('#now-testing').addClass('red');
+				}
+				else{
+					alert("Sedang Sibuk!");
+				}
+			});
+		});
+
+		function test(id){
+			$.ajax({
+				url: '<?= base_url('test/run/') ?>'+id,
+				method: 'get',
+				dataType: 'json',
+				beforeSend: function(){
+					$('#now-testing').html(id);
+				},
+				success: function(result){
+					if(result.status!='success'){
+						var html = '<tr>';
+						html += '<td>'+id+'</td>';
+						html += '<td>'+result.encrypt+'</td>';
+						html += '<td>'+result.decrypt+'</td>';
+						html += '<td>DECRYPTING FAIL!</td>';
+						$('#result').find('tbody').append(html);
+					}
+				},
+				error: function(){
+					var html = '<tr>';
+					html += '<td>'+id+'</td>';
+					html += '<td>'+result.encrypt+'</td>';
+					html += '<td>'+result.decrypt+'</td>';
+					html += '<td>SENDING AJAX FAIL!</td>';
+					$('#result').find('tbody').append(html);
+				},
+				complete: function(){
+					now++;
+					if(now<=max){
+						test(now);
+					}
+					else{
+						isBusy = false;
+						$('#now-testing').removeClass('red');
+						$('#now-testing').addClass('green');
+					}
+				}
+			})
+
+		}
+	</script>
+
+</body>
+</html>
